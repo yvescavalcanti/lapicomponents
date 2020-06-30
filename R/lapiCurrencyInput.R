@@ -52,7 +52,7 @@ lapiCurrencyInput <- function(inputId, label, value = 0, caption=NULL,
 					id = inputId, value = value, 
 					caption = caption, "data-thousands" = big.mark,
 					"data-decimal" = decimal.sep,
-					"data-symbol" = prefix,
+					"data-prefix" = prefix,
 					type="text", class=paste(class, "lapi-currency-input") 
 				   )
 				)
