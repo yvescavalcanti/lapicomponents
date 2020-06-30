@@ -1,0 +1,17 @@
+library("shiny");
+# source("R/lapiCurrencyInput.R")
+
+devtools::load_all()
+
+ui <- function(){
+	tags$div(
+		lapiCurrencyInput("teste", label="Dinheiro", value = "10")
+	)
+}
+
+server <- function(session, input, output){
+
+}
+
+
+shiny::shinyApp(ui = ui, server = server);
