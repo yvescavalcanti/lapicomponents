@@ -4,18 +4,22 @@ dropNulls <- function(x) {
 
 
 lapiInput <- function(iTag, class="", label="", caption=NULL, size=NULL){
+  
   div <- shiny::tags$div(class="form-group shiny-input-container",
                  shiny::tags$label(label, class="control-label lapi-label"),
-                  iTag,
-                  if (!is.null(caption)) {
-                    tag('small', list(caption, class="lapi-help-block"))
-                  }
-  )
+                 iTag,
+                 tags$small(caption, class="lapi-input-caption")
+				)
   div
 }
 
 packDependencies <- function(){
 	list(
+		htmltools::htmlDependency("lapicomponents-css", "0.1.0",
+			package = "lapicomponents",
+			src = "css",
+			stylesheet = "lapicomponents.css"
+		),
 		 htmltools::htmlDependency("lapicomponents", "0.1.0",
 			package = "lapicomponents",
 			src = "srcjs",
@@ -49,11 +53,13 @@ lapiCurrencyInput <- function(inputId, label, value = 0, caption=NULL,
 
   listProps <- dropNulls(
 				list(
-					id = inputId, value = value, 
-					caption = caption, "data-thousands" = big.mark,
+					id = inputId, 
+					value = value, 
+					"data-thousands" = big.mark,
 					"data-decimal" = decimal.sep,
 					"data-prefix" = prefix,
-					type="text", class=paste(class, "lapi-currency-input") 
+					type="text", 
+					class=paste(class, "lapi-currency-input form-control") 
 				   )
 				)
   inputTag <- do.call(tags$input, listProps)
@@ -63,6 +69,7 @@ lapiCurrencyInput <- function(inputId, label, value = 0, caption=NULL,
 			inputTag,
 			packDependencies()
 		),
+		caption = caption,
 		label = label
   )
 }
